@@ -34,7 +34,7 @@ A1=zeros(Nr*Nx); B1=zeros(Nr*Nx,1); A2=zeros(Mr*Mx); B2=zeros(Mr*Mx,1);
 for j=2:Nr-1
     for i = 2:Nx-1 
         k=Nr*(i-1)+j;
-        A1(k,k)=(-2*((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)-(2*Rmoy/dx^2);
+        A1(k,k)=(-((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)-(2*Rmoy/dx^2);
         A1(k,k-1)=(r1(j)-dr/2)/dr^2;
         A1(k,k+1)=(r1(j)+dr/2)/dr^2;
         A1(k,k-Nr)=Rmoy/dx^2;
@@ -46,7 +46,7 @@ end
 i=1; % Bord gauche
 for j=2:Nr-1
     k=Nr*(i-1)+j;
-    A1(k,k)=(-2*((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
+    A1(k,k)=(-((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
     A1(k,k-1)=(r1(j)-dr/2)/dr^2;
     A1(k,k+1)=(r1(j)+dr/2)/dr^2;
     A1(k,k+Nr)=-5*Rmoy/dx^2;
@@ -57,7 +57,7 @@ end
 i=Nx; % Bord droit
 for j=2:Nr-1
     k=Nr*(i-1)+j;
-    A1(k,k)=(-2*((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
+    A1(k,k)=(-((r1(j)+dr/2)+(r1(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
     A1(k,k-1)=(r1(j)-dr/2)/dr^2;
     A1(k,k+1)=(r1(j)+dr/2)/dr^2;
     A1(k,k-Nr)=-5*Rmoy/dx^2;
@@ -84,7 +84,7 @@ end
 for j=2:Mr-1
     for i = 2:Mx-1 
         k=Mr*(i-1)+j;
-        A2(k,k)=(-2*((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)-(2*Rmoy/dx^2);
+        A2(k,k)=(-((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)-(2*Rmoy/dx^2);
         A2(k,k-1)=(r2(j)-dr/2)/dr^2;
         A2(k,k+1)=(r2(j)+dr/2)/dr^2;
         A2(k,k-Mr)=Rmoy/dx^2;
@@ -96,7 +96,7 @@ end
 i=1; % Bord gauche
 for j=2:Mr-1
     k=Mr*(i-1)+j;
-    A2(k,k)=(-2*((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
+    A2(k,k)=(-((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
     A2(k,k-1)=(r2(j)-dr/2)/dr^2;
     A2(k,k+1)=(r2(j)+dr/2)/dr^2;
     A2(k,k+Mr)=-5*Rmoy/dx^2;
@@ -107,7 +107,7 @@ end
 i=Mx; % Bord droit
 for j=2:Mr-1
     k=Mr*(i-1)+j;
-    A2(k,k)=(-2*((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
+    A2(k,k)=(-((r2(j)+dr/2)+(r2(j)-dr/2))/dr^2)+(2*Rmoy/dx^2);
     A2(k,k-1)=(r2(j)-dr/2)/dr^2;
     A2(k,k+1)=(r2(j)+dr/2)/dr^2;
     A2(k,k-Mr)=-5*Rmoy/dx^2;
