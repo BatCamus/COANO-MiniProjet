@@ -1,5 +1,5 @@
 %%% Main 2D %%%
-
+clear all
 close all
 clf;
 
