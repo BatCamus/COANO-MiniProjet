@@ -16,7 +16,7 @@ l=Rext-Rint;
 Qint=(0)^2;
 Qpi=(400e3-101.3e3)^2;
 Qext=(0)^2;
-dx=0.1;
+dx=0.01;
 N=round((Rpi-Rint)/dx)+1;
 M=round((Rext-Rpi)/dx)+1;
 r1=Rint:dx:Rpi;
@@ -64,13 +64,13 @@ x=[r1,r2(2:length(r2))];
 p=[sqrt(Q1);sqrt(Q2(2:M))];
 panal=[sqrt(Qanal1');sqrt(Qanal2(2:M))'];
 
-plot(x,panal,'r-','linewidth',1)
+plot(x,panal,'rx','linewidth',0.5)
 hold on;
-plot(x,p,'bo')
+plot(x,p,'b.')
 xlabel('Rayon de la butée (en mm)')
 ylabel('Pression relative (en Pa)')
-title({['Répartition de pression le long de la butée aérostatique']; [' Rayon injecteur : ', num2str(Rpi), ' mm']})
-legend('Solution analytique', 'Solution numérique')
+title({'Répartition de pression le long de la butée aérostatique'; ' (Rayon injecteur : ' ;num2str(Rpi); ')'})
+
 
 
 
