@@ -47,11 +47,11 @@ end
 i=Nx; % Bord droit
 for j=2:Nr-1
     k=Nr*(i-1)+j;
-    A(k,k)=(-2*((r(j)+dr/2)+(r(j)-dr/2))/dr^2)+(3/(2*dx));
+    A(k,k)=(-2*((r(j)+dr/2)+(r(j)-dr/2))/dr^2)+(3/(2*dx))-(Rmoy/dx^2);
     A(k,k-1)=(r(j)-dr/2)/dr^2;
     A(k,k+1)=(r(j)+dr/2)/dr^2;
-    A(k,k-Nr)=-4/(2*dx);
-    A(k,k-2*Nr)=1/(2*dx);
+    A(k,k-Nr)=-4/(2*dx)+Rmoy/dx^2;
+    A(k,k-2*Nr)=1/(2*dx)+Rmoy/dx^2;
     B(k)=0;
 end
 j=1; % Rayon intérieur
