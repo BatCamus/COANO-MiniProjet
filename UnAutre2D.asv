@@ -83,9 +83,9 @@ for j=2:Nr-1
 %     A(k,k)=-2*((r(j)/dr^2));
 %     A(k,k-1)=(r(j)-dr/2)/dr^2;
 %     A(k,k+1)=(r(j)+dr/2)/dr^2;
-    A(k,k)=-3*Rmoy/dx^2;
-    A(k,k-*Nr)=4*Rmoy/dx^2;
-    A(k,k-2*Nr)=-Rmoy/dx^2;
+    A(k,k-Nr)=-5*Rmoy/dx^2;
+    A(k,k-2*Nr)=4*Rmoy/dx^2;
+    A(k,k-3*Nr)=-Rmoy/dx^2;
 end
 
 

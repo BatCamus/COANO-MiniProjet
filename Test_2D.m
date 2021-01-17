@@ -4,11 +4,13 @@ clc;
 
 pinj = 400e3;
 pe = 101.3e3;
+
 Rinj = 48;
 Rint = 30;
 Rext = 75;
 Rmoy = (Rint+Rext)/2;
 L    = 2*pi*Rmoy;
+
 
 n = 3;
 Nx = 24*n+1
@@ -67,9 +69,10 @@ end
 for i=1:Nx
     k=Nr*(i-1)+j;
     if A(k,k)== 0
-    A(k,k)=-2*((r(j)/dr^2)+(Rmoy/dx^2));
-    A(k,k-1)=(r(j)-dr/2)/dr^2;
-    A(k,k+1)=(r(j)+dr/2)/dr^2;
+    A(k,k)=(r(j)+8*dr)/(2*dr^2);
+    A(k,k-1)=(6*dr-13*r(j))/2*dr^2;
+    A(k,k-2)=(7*r(j))/2*dr^2;
+    A(k,k-3)=(r(j)-2*dr)/2*dr^2;
     A(k,k-Nr+1)=Rmoy/dx^2;
     A(k,k+Nr+1)=Rmoy/dx^2;
     B(k)=0;
@@ -78,7 +81,7 @@ end
 
 Q=A\B;
 
-%p1=sqrt(Q);
+% p1=sqrt(Q);
 p1 = Q;
 
 graph=zeros(Nx,Nr-1);
