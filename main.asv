@@ -75,9 +75,9 @@ legend('Solution analytique', 'Solution numérique')
 %% Erreur 
 erreur = zeros(N+M,1);
 for i = 1 : N
-    erreur(i)=abs(Q1(i)-Qanal1(i))/Qanal2(i);
+    erreur(i)=abs(Q1(i)-Qanal1(i))
 end
-for i = 1:M
-    erreur(i+N)=abs(Q2(i)-Qanal2(i))/Qanal2(i);
+for i = N:M
+    erreur(i)=abs(Q2(i)-Qanal2(i))
 end
-errmean=mean(erreur)
+errmean=mean(erreur=
