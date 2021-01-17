@@ -10,7 +10,7 @@ Rext = 75;
 Rmoy = (Rint+Rext)/2;
 L    = pi*Rmoy/6;
 
-n = 3;
+n = 25;
 Nx = 2*n+1
 dx = L/(Nx-1)
 Nr = 2*n+1;
@@ -39,6 +39,28 @@ for i=1:Nx
     B(k)=pe^2;
 end
 
+i=1; % Bord gauche
+for j=2:Nr
+    k=Nr*(i-1)+j;
+    A(k,k)=-2*((r(j)/dr^2)+(-3*Rmoy/dx^2));
+    A(k,k-1)=(r(j)-dr/2)/dr^2;
+    A(k,k+1)=(r(j)+dr/2)/dr^2;
+%     A(k,k)=-3*Rmoy/dx^2;
+    A(k,k+Nr)=4*Rmoy/dx^2;
+    A(k,k+2*Nr)=-Rmoy/dx^2;
+    B(k)=0;
+end
+
+i=Nx; % Bord droit
+for j=2:Nr-1
+    k=Nr*(i-1)+j;
+    A(k,k)=-2*((r(j)/dr^2)+(3*Rmoy/dx^2));
+%     A(k,k)=3*Rmoy/dx^2;
+    A(k,k-Nr)=-4*Rmoy/dx^2;
+    A(k,k-2*Nr)=Rmoy/dx^2;
+    B(k)=0;
+end
+
 j=Nr %Ligne injecteur
 
 k=Nr*n+j;
@@ -47,52 +69,56 @@ B(k)=pinj^2;
     
 for i=2:n
     k=Nr*(i-1)+j;
-    A(k,k)=(r(j)+8*dr)/(2*dr^2)-2*r(j)*Rmoy/dr^2;
-    A(k,k-1)=(6*dr-13*r(j))/2*dr^2;
-    A(k,k-2)=(7*r(j))/2*dr^2;
-    A(k,k-3)=(r(j)-2*dr)/2*dr^2;
+% %     A(k,k)=(-3*r(j)+12*dr);%/(4*dr^2)-2*Rmoy/dx^2;
+% %     A(k,k-1)=-(2*dr+11*r(j));%/4*dr^2;
+% %     A(k,k-2)=(r(j)-4*dr);%/4*dr^2;
+% %     A(k,k-3)=(r(j)-2*dr);%/4*dr^2;
+
+%     A(k,k)=(9*r(j)/4-r(j-1))/(dr^2)-2*Rmoy/dx^2;
+%     A(k,k-1)=-(r(j-2)/4-3*r(j))/dr^2;
+%     A(k,k-2)=(3*r(j)/4-r(j-1))/dr^2;
+%     A(k,k-3)=(r(j-2)/4)/dr^2;
+    
+    A(k,k)=(r(j)+3*dr/2)/(dr^2)-2*Rmoy/dx^2;
+    A(k,k-1)=-(2*r(j)+2*dr)/dr^2;
+    A(k,k-2)=(r(j)-dr/2)/dr^2;
+ 
+%     A(k,k) = -2*Rmoy/dx^2;
+
     A(k,k-Nr)=Rmoy/dx^2;
     A(k,k+Nr)=Rmoy/dx^2;
     B(k)=0;
 end
 for i=n+2:Nx
     k=Nr*(i-1)+j;
-    A(k,k)=(r(j)+8*dr)/(2*dr^2)-2*r(j)*Rmoy/dr^2;
-    A(k,k-1)=(6*dr-13*r(j))/2*dr^2;
-    A(k,k-2)=(7*r(j))/2*dr^2;
-    A(k,k-3)=(r(j)-2*dr)/2*dr^2;
+    
+%     A(k,k)=(9*r(j)/4-r(j-1))/(dr^2)-2*Rmoy/dx^2;
+%     A(k,k-1)=-(r(j-2)/4-3*r(j))/dr^2;
+%     A(k,k-2)=(3*r(j)/4-r(j-1))/dr^2;
+%     A(k,k-3)=(r(j-2)/4)/dr^2;
+
+% %     A(k,k)=(-3*r(j)+12*dr);%/(4*dr^2)-2*Rmoy/dx^2;
+% %     A(k,k-1)=-(2*dr+11*r(j));%/4*dr^2;
+% %     A(k,k-2)=(r(j)-4*dr);%/4*dr^2;
+% %     A(k,k-3)=(r(j)-2*dr);%/4*dr^2;
+
+    A(k,k)=(r(j)+3*dr/2)/(dr^2)-2*Rmoy/dx^2;
+    A(k,k-1)=-(2*r(j)+2*dr)/dr^2;
+    A(k,k-2)=(r(j)-dr/2)/dr^2;
+    
+%     A(k,k) = -2*Rmoy/dx^2;
+
     A(k,k-Nr)=Rmoy/dx^2;
     A(k,k+Nr)=Rmoy/dx^2;
     B(k)=0;
 end
 
-i=1; % Bord gauche
-for j=2:Nr-1
-    k=Nr*(i-1)+j;
-%     A(k,k)=-2*((r(j)/dr^2));
-%     A(k,k-1)=(r(j)-dr/2)/dr^2;
-%     A(k,k+1)=(r(j)+dr/2)/dr^2;
-    A(k,k+Nr)=-5*Rmoy/dx^2;
-    A(k,k+2*Nr)=4*Rmoy/dx^2;
-    A(k,k+3*Nr)=-Rmoy/dx^2;
-end
-
-i=Nx; % Bord droit
-for j=2:Nr-1
-    k=Nr*(i-1)+j;
-%     A(k,k)=-2*((r(j)/dr^2));
-%     A(k,k-1)=(r(j)-dr/2)/dr^2;
-%     A(k,k+1)=(r(j)+dr/2)/dr^2;
-    A(k,k)=-3*Rmoy/dx^2;
-    A(k,k-*Nr)=4*Rmoy/dx^2;
-    A(k,k-2*Nr)=-Rmoy/dx^2;
-end
-
 
 Q = A\B;
 
-% p1=sqrt(Q);
-p1 = Q;
+
+ p1=sqrt(abs(Q));
+% p1 = Q;
 
 graph=zeros(Nx,Nr-1);
 for i=1:Nx
